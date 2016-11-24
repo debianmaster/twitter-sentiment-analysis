@@ -1,0 +1,7 @@
+FROM python:3.3.6-alpine
+ADD ./ .
+RUN apk add --no-cache g++
+RUN adduser app_user -D
+RUN pip install -r requirements-client.txt
+USER app_user
+CMD [ "python", "./client.py" ]

@@ -25,7 +25,7 @@ class listener(StreamListener):
 		self.cb=cb
 
 	def on_error(self, status):
-		print status
+		print(status)
 
 	def on_data(self,data):
 		all_data = json.loads(data)
@@ -47,7 +47,7 @@ class Namespace(LoggingNamespace):
 
 
 
-socketIO = SocketIO('localhost', 8000, Namespace)
+socketIO = SocketIO(os.environ.get('socket_server'),os.environ.get('socker_port'), Namespace)
 nsp = socketIO.define(Namespace, '/chat')
     #socketIO.wait(seconds=1)
     #socketIO.wait(seconds=1)

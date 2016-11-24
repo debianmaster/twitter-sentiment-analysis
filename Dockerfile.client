@@ -1,7 +1,9 @@
 FROM python:3.3.6-alpine
-ADD ./ .
+ADD requirements-client.txt requirements-client.txt
 RUN apk add --no-cache g++
 RUN adduser app_user -D
 RUN pip install -r requirements-client.txt
+ADD ./ .
 USER app_user
+EXPOSE 8080
 CMD [ "python", "./client.py" ]

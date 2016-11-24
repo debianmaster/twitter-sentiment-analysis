@@ -1,7 +1,10 @@
 FROM python:3.3.6-alpine
-ADD ./ .
+ADD requirements-server.txt requirements-server.txt
 RUN apk add --no-cache g++
 RUN adduser app_user -D
 RUN pip install -r requirements-server.txt
+ADD ./ .
+RUN chmod -R 777 templates/*
 USER app_user
+EXPOSE 8080
 CMD [ "python", "./server.py" ]

@@ -2,6 +2,7 @@ import socketio
 import eventlet
 import eventlet.wsgi
 from flask import Flask, render_template
+import os
 
 sio = socketio.Server()
 app = Flask(__name__)
@@ -26,12 +27,12 @@ def message(sid, data):
 def disconnect(sid):
     print('disconnect ', sid)
 
+
 if __name__ == '__main__':
     # wrap Flask application with engineio's middleware
     app = socketio.Middleware(sio, app)
-
     # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
+    eventlet.wsgi.server(eventlet.listen(('0.0.0.0',int(os.environ.get('socket_port')))), app)
 
 
 

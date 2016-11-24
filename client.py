@@ -60,7 +60,7 @@ def cb2(alysys,tweet):
     nsp.emit('chat',{'score':score,'tweet':tweet},namespace='/chat')
 
 twitterStream = Stream(auth, listener(cb2))
-twitterStream.filter(track=["noteban","demonetisation","bharatbandh"],async=True)
+twitterStream.filter(track=["noteban","demonetisation"],async=True)
 
 print("invoking ..2")
 
